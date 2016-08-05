@@ -46,6 +46,9 @@ public class ItemHologram extends Hologram
 	// -------
 	protected Vector3D getRotatableOffset()
 	{
+		if(this.itemStack.getType() == Material.SKULL_ITEM)
+			return new Vector3D(-0.21, -1.03, 0.43);
+
 		if(displayAsFullBlock(this.itemStack.getType()))
 			return new Vector3D(-0.05, -0.8, 0.25);
 
@@ -60,9 +63,6 @@ public class ItemHologram extends Hologram
 
 		if(this.itemStack.getType() == Material.BANNER)
 			return new Vector3D(0.9, -1.8, 0.07);
-
-		if(this.itemStack.getType() == Material.SKULL_ITEM)
-			return new Vector3D(0, 0, 0);
 
 		if(displayAsRod(this.itemStack.getType()))
 			return new Vector3D(0.93, -1.2, 0.07);
@@ -125,18 +125,19 @@ public class ItemHologram extends Hologram
 			this.armorStand.setRightArmPose(this.armPose);
 		else
 		{
-			if(displayAsFullBlock(this.itemStack.getType()))
+			if(this.itemStack.getType() == Material.SKULL_ITEM)
+				this.armorStand.setRightArmPose(new Vector3f(-45f, -135f, 0f));
+			else if(displayAsFullBlock(this.itemStack.getType()))
 				this.armorStand.setRightArmPose(new Vector3f(-15f, -135f, 0f));
 			else
 			{
+
 				if(displayAsTool(this.itemStack.getType()))
 					this.armorStand.setRightArmPose(new Vector3f(-145f, -90f, 0f));
 				else if(displayAsBannerOrShield(this.itemStack.getType()))
 					this.armorStand.setRightArmPose(new Vector3f(-90f, 90f, 0f));
 				else if(this.itemStack.getType() == Material.BOW)
 					this.armorStand.setRightArmPose(new Vector3f(0f, 100f, 220f));
-				else if(this.itemStack.getType() == Material.SKULL_ITEM)
-					this.armorStand.setRightArmPose(new Vector3f(-45f, -135f, 0f));
 				else if(displayAsRod(this.itemStack.getType()))
 					this.armorStand.setRightArmPose(new Vector3f(-35f, 90f, 0f));
 				else

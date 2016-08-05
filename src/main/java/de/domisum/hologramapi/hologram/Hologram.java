@@ -74,7 +74,7 @@ public abstract class Hologram
 				asLocation.getY(), asLocation.getZ());
 		this.armorStand.yaw = asLocation.getYaw();
 
-		this.armorStand.setInvisible(false);
+		this.armorStand.setInvisible(true);
 		this.armorStand.setGravity(false);
 	}
 
