@@ -22,20 +22,16 @@ public class ItemHologram extends Hologram
 	protected boolean small;
 	protected Location viewLocation;
 
-	protected Vector3f armPose;
-
 
 	// -------
 	// CONSTRUCTOR
 	// -------
-	public ItemHologram(Location location, ItemStack itemStack, boolean small, Location viewLocation, Vector3f armPose)
+	public ItemHologram(Location location, ItemStack itemStack, Location viewLocation)
 	{
 		super(location);
 		this.itemStack = itemStack;
-		this.small = small;
+		this.small = false; // small; TODO implement small
 		this.viewLocation = viewLocation;
-
-		this.armPose = armPose;
 
 		createArmorStand();
 	}
@@ -80,6 +76,10 @@ public class ItemHologram extends Hologram
 		Location helperLocation = this.viewLocation.clone();
 		helperLocation.setDirection(direction);
 		float angle = helperLocation.getYaw() - this.location.getYaw();
+
+		Vector3D rotatableOffset = getRotatableOffset();
+		if(this.small)
+			rotatableOffset = rotatableOffset.multiply(0.5);
 		Vector3D rotatedOffset = VectorUtil.rotateOnXZPlane(getRotatableOffset(), -angle);
 
 		Location offsetLocation = this.location.clone().add(rotatedOffset.x, rotatedOffset.y, rotatedOffset.z);
@@ -99,11 +99,6 @@ public class ItemHologram extends Hologram
 		sendItemInHandPacket(getVisibleToArray());
 	}
 
-	public void setSmall(boolean small)
-	{
-		// TODO set small packet
-	}
-
 	public void setViewLocation(Location viewLocation)
 	{
 		this.viewLocation = viewLocation;
@@ -120,29 +115,23 @@ public class ItemHologram extends Hologram
 	{
 		super.createArmorStand();
 
-		this.armorStand.setArms(true);
-		if(this.armPose != null)
-			this.armorStand.setRightArmPose(this.armPose);
+		if(this.itemStack.getType() == Material.SKULL_ITEM)
+			this.armorStand.setRightArmPose(new Vector3f(-45f, -135f, 0f));
+		else if(displayAsFullBlock(this.itemStack.getType()))
+			this.armorStand.setRightArmPose(new Vector3f(-15f, -135f, 0f));
 		else
 		{
-			if(this.itemStack.getType() == Material.SKULL_ITEM)
-				this.armorStand.setRightArmPose(new Vector3f(-45f, -135f, 0f));
-			else if(displayAsFullBlock(this.itemStack.getType()))
-				this.armorStand.setRightArmPose(new Vector3f(-15f, -135f, 0f));
-			else
-			{
 
-				if(displayAsTool(this.itemStack.getType()))
-					this.armorStand.setRightArmPose(new Vector3f(-145f, -90f, 0f));
-				else if(displayAsBannerOrShield(this.itemStack.getType()))
-					this.armorStand.setRightArmPose(new Vector3f(-90f, 90f, 0f));
-				else if(this.itemStack.getType() == Material.BOW)
-					this.armorStand.setRightArmPose(new Vector3f(0f, 100f, 220f));
-				else if(displayAsRod(this.itemStack.getType()))
-					this.armorStand.setRightArmPose(new Vector3f(-35f, 90f, 0f));
-				else
-					this.armorStand.setRightArmPose(new Vector3f(-90f, 0f, 0f));
-			}
+			if(displayAsTool(this.itemStack.getType()))
+				this.armorStand.setRightArmPose(new Vector3f(-145f, -90f, 0f));
+			else if(displayAsBannerOrShield(this.itemStack.getType()))
+				this.armorStand.setRightArmPose(new Vector3f(-90f, 90f, 0f));
+			else if(this.itemStack.getType() == Material.BOW)
+				this.armorStand.setRightArmPose(new Vector3f(0f, 100f, 220f));
+			else if(displayAsRod(this.itemStack.getType()))
+				this.armorStand.setRightArmPose(new Vector3f(-35f, 90f, 0f));
+			else
+				this.armorStand.setRightArmPose(new Vector3f(-90f, 0f, 0f));
 		}
 
 		this.armorStand.setSmall(this.small);
