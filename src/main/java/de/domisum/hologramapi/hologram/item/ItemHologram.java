@@ -1,4 +1,4 @@
-package de.domisum.hologramapi.hologram;
+package de.domisum.hologramapi.hologram.item;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -10,6 +10,7 @@ import org.bukkit.util.Vector;
 
 import de.domisum.auxiliumapi.data.container.math.Vector3D;
 import de.domisum.auxiliumapi.util.math.VectorUtil;
+import de.domisum.hologramapi.hologram.Hologram;
 import net.minecraft.server.v1_9_R1.EnumItemSlot;
 import net.minecraft.server.v1_9_R1.PacketPlayOutEntityEquipment;
 import net.minecraft.server.v1_9_R1.Vector3f;

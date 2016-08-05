@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.domisum.auxiliumapi.AuxiliumAPI;
-import de.domisum.hologramapi.hologram.HologramManager;
 
 public class HologramAPI
 {

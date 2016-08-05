@@ -1,4 +1,4 @@
-package de.domisum.hologramapi.hologram;
+package de.domisum.hologramapi.hologram.item;
 
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_9_R1.CraftWorld;
@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import de.domisum.auxiliumapi.util.bukkit.PacketUtil;
+import de.domisum.hologramapi.hologram.Hologram;
 import net.minecraft.server.v1_9_R1.EntityItem;
 import net.minecraft.server.v1_9_R1.PacketPlayOutEntityDestroy;
 import net.minecraft.server.v1_9_R1.PacketPlayOutEntityMetadata;
