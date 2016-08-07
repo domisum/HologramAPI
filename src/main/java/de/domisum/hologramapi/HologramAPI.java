@@ -13,8 +13,6 @@ public class HologramAPI
 	private static HologramAPI instance;
 	private JavaPlugin plugin;
 
-	private HologramManager hologramManager;
-
 
 	// -------
 	// CONSTRUCTOR
@@ -29,6 +27,9 @@ public class HologramAPI
 
 	public static void initialize(JavaPlugin plugin)
 	{
+		if(instance != null)
+			return;
+
 		new HologramAPI(plugin);
 	}
 
@@ -51,11 +52,6 @@ public class HologramAPI
 	public static HologramAPI getInstance()
 	{
 		return instance;
-	}
-
-	public static HologramManager getHologramManager()
-	{
-		return getInstance().hologramManager;
 	}
 
 	public Logger getLogger()

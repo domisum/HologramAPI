@@ -1,11 +1,13 @@
 package de.domisum.hologramapi.hologram.item;
 
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_9_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_9_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import de.domisum.auxiliumapi.data.container.math.Vector3D;
 import de.domisum.auxiliumapi.util.bukkit.PacketUtil;
 import de.domisum.hologramapi.hologram.Hologram;
 import net.minecraft.server.v1_9_R1.EntityItem;
@@ -30,9 +32,14 @@ public class ItemDropHologram extends Hologram
 	// -------
 	// CONSTRUCTOR
 	// -------
-	public ItemDropHologram(Location location, ItemStack itemStack)
+	public ItemDropHologram(World world, ItemStack itemStack)
 	{
-		super(location);
+		this(world, new Vector3D(), itemStack);
+	}
+
+	public ItemDropHologram(World world, Vector3D location, ItemStack itemStack)
+	{
+		super(world, location);
 		this.itemStack = itemStack;
 
 		createArmorStand();
@@ -46,7 +53,7 @@ public class ItemDropHologram extends Hologram
 	@Override
 	protected Location getArmorStandLocation()
 	{
-		return this.location.clone().add(0, OFFSET_Y, 0);
+		return super.getArmorStandLocation().add(0, OFFSET_Y, 0);
 	}
 
 
@@ -67,8 +74,8 @@ public class ItemDropHologram extends Hologram
 	// -------
 	protected void createItem()
 	{
-		this.item = new EntityItem(((CraftWorld) this.location.getWorld()).getHandle(), this.location.getX(),
-				this.location.getY(), this.location.getZ(), CraftItemStack.asNMSCopy(this.itemStack));
+		this.item = new EntityItem(((CraftWorld) this.world).getHandle(), this.location.x, this.location.y, this.location.z,
+				CraftItemStack.asNMSCopy(this.itemStack));
 		this.armorStand.passengers.add(this.item);
 	}
 

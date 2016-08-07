@@ -1,8 +1,10 @@
 package de.domisum.hologramapi.hologram;
 
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 
+import de.domisum.auxiliumapi.data.container.math.Vector3D;
 import de.domisum.auxiliumapi.util.bukkit.PacketUtil;
 import net.minecraft.server.v1_9_R1.PacketPlayOutEntityMetadata;
 
@@ -19,12 +21,20 @@ public class TextHologram extends Hologram
 	// -------
 	// CONSTRUCTOR
 	// -------
-	public TextHologram(Location location, String text)
+	public TextHologram(World world, String text)
 	{
-		super(location);
-		this.text = text;
+		this(world, new Vector3D(), text);
+	}
 
-		createArmorStand();
+	public TextHologram(String text)
+	{
+		this(null, new Vector3D(), text);
+	}
+
+	public TextHologram(World world, Vector3D location, String text)
+	{
+		super(world, location);
+		this.text = text;
 	}
 
 
@@ -34,7 +44,7 @@ public class TextHologram extends Hologram
 	@Override
 	protected Location getArmorStandLocation()
 	{
-		return this.location.clone().add(0, OFFSET_Y, 0);
+		return super.getArmorStandLocation().add(0, OFFSET_Y, 0);
 	}
 
 

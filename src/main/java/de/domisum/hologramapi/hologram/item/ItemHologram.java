@@ -2,13 +2,13 @@ package de.domisum.hologramapi.hologram.item;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_9_R1.entity.CraftPlayer;
+import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_9_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.util.Vector;
 
 import de.domisum.auxiliumapi.data.container.math.Vector3D;
+import de.domisum.auxiliumapi.util.bukkit.PacketUtil;
 import de.domisum.auxiliumapi.util.math.VectorUtil;
 import de.domisum.hologramapi.hologram.Hologram;
 import net.minecraft.server.v1_9_R1.EnumItemSlot;
@@ -20,21 +20,32 @@ public class ItemHologram extends Hologram
 
 	// PROPERTIES
 	protected ItemStack itemStack;
-	protected boolean small;
-	protected Location viewLocation;
+	protected double rotation;
 
 
 	// -------
 	// CONSTRUCTOR
 	// -------
-	public ItemHologram(Location location, ItemStack itemStack, Location viewLocation)
+	public ItemHologram(Location location, ItemStack itemStack)
 	{
-		super(location);
-		this.itemStack = itemStack;
-		this.small = false; // small; TODO implement small
-		this.viewLocation = viewLocation;
+		this(location.getWorld(), new Vector3D(location), itemStack);
+	}
 
-		createArmorStand();
+	public ItemHologram(Vector3D location, ItemStack itemStack)
+	{
+		this(null, location, itemStack);
+	}
+
+	public ItemHologram(ItemStack itemStack)
+	{
+		this(null, null, itemStack);
+	}
+
+	public ItemHologram(World world, Vector3D location, ItemStack itemStack)
+	{
+		super(world, location);
+		this.itemStack = itemStack;
+		// TODO implement small
 	}
 
 
@@ -70,21 +81,18 @@ public class ItemHologram extends Hologram
 	@Override
 	protected Location getArmorStandLocation()
 	{
-		Vector direction = this.location.toVector().subtract(this.viewLocation.toVector()).normalize();
+		Vector3D direction = this.location.subtract(this.viewLocation);
 		if(direction.length() == 0)
-			direction = new Vector(0.001, 0, 0);
+			direction = new Vector3D(0, 0, 0.001);
+		else
+			direction = direction.normalize();
 
-		Location helperLocation = this.viewLocation.clone();
-		helperLocation.setDirection(direction);
-		float angle = helperLocation.getYaw() - this.location.getYaw();
-
+		double angle = VectorUtil.getYawFromDirection(direction) + this.rotation;
 		Vector3D rotatableOffset = getRotatableOffset();
-		if(this.small)
-			rotatableOffset = rotatableOffset.multiply(0.5);
-		Vector3D rotatedOffset = VectorUtil.rotateOnXZPlane(getRotatableOffset(), -angle);
+		Vector3D rotatedOffset = VectorUtil.rotateOnXZPlane(rotatableOffset, -angle);
 
-		Location offsetLocation = this.location.clone().add(rotatedOffset.x, rotatedOffset.y, rotatedOffset.z);
-		offsetLocation.setYaw(angle);
+		Location offsetLocation = super.getArmorStandLocation().add(rotatedOffset.x, rotatedOffset.y, rotatedOffset.z);
+		offsetLocation.setYaw((float) angle);
 
 		return offsetLocation;
 	}
@@ -100,11 +108,17 @@ public class ItemHologram extends Hologram
 		sendItemInHandPacket(getVisibleToArray());
 	}
 
-	public void setViewLocation(Location viewLocation)
+	@Override
+	public void setViewLocation(Vector3D viewLocation)
 	{
-		this.viewLocation = viewLocation;
+		super.setViewLocation(viewLocation);
 
 		teleport();
+	}
+
+	public void setRotation(double rotation)
+	{
+		this.rotation = rotation;
 	}
 
 
@@ -122,7 +136,6 @@ public class ItemHologram extends Hologram
 			this.armorStand.setRightArmPose(new Vector3f(-15f, -135f, 0f));
 		else
 		{
-
 			if(displayAsTool(this.itemStack.getType()))
 				this.armorStand.setRightArmPose(new Vector3f(-145f, -90f, 0f));
 			else if(displayAsBannerOrShield(this.itemStack.getType()))
@@ -134,16 +147,6 @@ public class ItemHologram extends Hologram
 			else
 				this.armorStand.setRightArmPose(new Vector3f(-90f, 0f, 0f));
 		}
-
-		this.armorStand.setSmall(this.small);
-	}
-
-	@Override
-	protected void teleport()
-	{
-		super.teleport();
-
-		sendItemInHandPacket(getVisibleToArray());
 	}
 
 
@@ -162,8 +165,7 @@ public class ItemHologram extends Hologram
 		PacketPlayOutEntityEquipment packet = new PacketPlayOutEntityEquipment(this.armorStand.getId(), EnumItemSlot.MAINHAND,
 				CraftItemStack.asNMSCopy(this.itemStack));
 
-		for(Player p : players)
-			((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);
+		PacketUtil.sendPacket(packet, players);
 	}
 
 
