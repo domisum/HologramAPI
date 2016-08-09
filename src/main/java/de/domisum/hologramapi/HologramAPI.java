@@ -25,7 +25,7 @@ public class HologramAPI
 		onEnable();
 	}
 
-	public static void initialize(JavaPlugin plugin)
+	public static void enable(JavaPlugin plugin)
 	{
 		if(instance != null)
 			return;
@@ -33,14 +33,23 @@ public class HologramAPI
 		new HologramAPI(plugin);
 	}
 
+	public static void disable()
+	{
+		if(instance == null)
+			return;
+
+		getInstance().onDisable();
+		instance = null;
+	}
+
 	protected void onEnable()
 	{
-		AuxiliumAPI.initialize(this.plugin);
+		AuxiliumAPI.enable(this.plugin);
 
 		getLogger().info(this.getClass().getSimpleName() + " has been enabled");
 	}
 
-	public void onDisable()
+	protected void onDisable()
 	{
 		getLogger().info(this.getClass().getSimpleName() + " has been disabled");
 	}
