@@ -1,5 +1,7 @@
 package de.domisum.hologramapi.hologram;
 
+import de.domisum.auxiliumapi.util.java.annotations.APIUsage;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -8,6 +10,7 @@ import de.domisum.auxiliumapi.data.container.math.Vector3D;
 import de.domisum.auxiliumapi.util.bukkit.PacketUtil;
 import net.minecraft.server.v1_9_R1.PacketPlayOutEntityMetadata;
 
+@APIUsage
 public class TextHologram extends Hologram
 {
 
@@ -41,6 +44,17 @@ public class TextHologram extends Hologram
 	// -------
 	// GETTERS
 	// -------
+	public String getText()
+	{
+		return this.text;
+	}
+
+	public double getWidth()
+	{
+		return getWidth(this.text);
+	}
+
+
 	@Override
 	protected Location getArmorStandLocation()
 	{
@@ -70,6 +84,7 @@ public class TextHologram extends Hologram
 
 		this.armorStand.setCustomName(this.text);
 		this.armorStand.setCustomNameVisible(true);
+		this.armorStand.setSmall(true);
 	}
 
 
@@ -81,6 +96,17 @@ public class TextHologram extends Hologram
 		PacketPlayOutEntityMetadata packet = new PacketPlayOutEntityMetadata(this.armorStand.getId(),
 				this.armorStand.getDataWatcher(), true);
 		PacketUtil.sendPacket(packet, players);
+	}
+
+
+	// -------
+	// UTIL
+	// -------
+	public static double getWidth(String text)
+	{
+		text = ChatColor.stripColor(text);
+
+		return text.length()*1.15;
 	}
 
 }
