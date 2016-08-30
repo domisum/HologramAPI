@@ -68,9 +68,12 @@ public class TextHologram extends Hologram
 	public void setText(String text)
 	{
 		this.text = text;
-		this.armorStand.setCustomName(text);
 
-		sendMetadataPacket(getVisibleToArray());
+		if(this.armorStand != null)
+		{
+			this.armorStand.setCustomName(text);
+			sendMetadataPacket(getVisibleToArray());
+		}
 	}
 
 
