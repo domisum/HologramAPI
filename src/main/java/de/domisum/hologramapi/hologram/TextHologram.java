@@ -106,7 +106,7 @@ public class TextHologram extends Hologram
 	{
 		text = ChatColor.stripColor(text);
 
-		return text.length()*1.15;
+		return text.length()*0.13;
 	}
 
 }
