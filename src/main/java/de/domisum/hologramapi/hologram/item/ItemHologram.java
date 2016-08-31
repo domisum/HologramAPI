@@ -58,7 +58,7 @@ public class ItemHologram extends Hologram
 			return new Vector3D(-0.21, -1.03, 0.43);
 
 		if(displayAsFullBlock(this.itemStack.getType()))
-			return new Vector3D(-0.05, -0.8, 0.25);
+			return new Vector3D(-0.05, -0.85, 0.25);
 
 		if(displayAsTool(this.itemStack.getType()))
 			return new Vector3D(0.3, -2.05, 0.06);
@@ -75,7 +75,7 @@ public class ItemHologram extends Hologram
 		if(displayAsRod(this.itemStack.getType()))
 			return new Vector3D(0.93, -1.2, 0.07);
 
-		return new Vector3D(0.37, -1.65, -0.55);
+		return new Vector3D(0.37, -1.7, -0.55);
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class ItemHologram extends Hologram
 		else
 			direction = direction.normalize();
 
-		double angle = VectorUtil.getYawFromDirection(direction) + this.rotation;
+		double angle = VectorUtil.getYawFromDirection(direction)+this.rotation;
 		Vector3D rotatableOffset = getRotatableOffset();
 		Vector3D rotatedOffset = VectorUtil.rotateOnXZPlane(rotatableOffset, -angle);
 
