@@ -24,6 +24,11 @@ public class TextHologram extends Hologram
 	// -------
 	// CONSTRUCTOR
 	// -------
+	public TextHologram(Location location, String text)
+	{
+		this(location.getWorld(), new Vector3D(location), text);
+	}
+
 	public TextHologram(World world, String text)
 	{
 		this(world, new Vector3D(), text);
