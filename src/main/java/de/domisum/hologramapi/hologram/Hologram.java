@@ -1,12 +1,5 @@
 package de.domisum.hologramapi.hologram;
 
-import java.util.List;
-
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_9_R1.CraftWorld;
-import org.bukkit.entity.Player;
-
 import de.domisum.auxiliumapi.data.container.math.Vector3D;
 import de.domisum.auxiliumapi.data.structure.pds.PlayerList;
 import de.domisum.auxiliumapi.util.bukkit.PacketUtil;
@@ -15,6 +8,12 @@ import net.minecraft.server.v1_9_R1.PacketPlayOutEntity.PacketPlayOutEntityLook;
 import net.minecraft.server.v1_9_R1.PacketPlayOutEntityDestroy;
 import net.minecraft.server.v1_9_R1.PacketPlayOutEntityTeleport;
 import net.minecraft.server.v1_9_R1.PacketPlayOutSpawnEntityLiving;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.craftbukkit.v1_9_R1.CraftWorld;
+import org.bukkit.entity.Player;
+
+import java.util.List;
 
 public abstract class Hologram
 {
@@ -90,6 +89,11 @@ public abstract class Hologram
 	protected void createArmorStand()
 	{
 		Location asLocation = getArmorStandLocation();
+		if(asLocation == null)
+			throw new IllegalArgumentException("The hologram's armorstand can't be created when the location is null");
+		if(asLocation.getWorld() == null)
+			throw new IllegalArgumentException("The hologram's armorstand can't be created when the world is null");
+
 		this.armorStand = new EntityArmorStand(((CraftWorld) asLocation.getWorld()).getHandle(), asLocation.getX(),
 				asLocation.getY(), asLocation.getZ());
 		this.armorStand.yaw = asLocation.getYaw();
