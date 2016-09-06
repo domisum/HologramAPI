@@ -151,6 +151,9 @@ public abstract class Hologram
 
 	protected void hideFromSendPackets(Player... players)
 	{
+		if(this.armorStand == null)
+			return;
+
 		PacketPlayOutEntityDestroy packet = new PacketPlayOutEntityDestroy(this.armorStand.getId());
 		PacketUtil.sendPacket(packet, players);
 	}
