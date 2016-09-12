@@ -1,14 +1,13 @@
 package de.domisum.lib.hologram.hologram;
 
-import de.domisum.auxiliumapi.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.data.container.math.Vector3D;
+import de.domisum.lib.auxilium.util.bukkit.PacketUtil;
+import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import net.minecraft.server.v1_9_R1.PacketPlayOutEntityMetadata;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
-
-import de.domisum.auxiliumapi.data.container.math.Vector3D;
-import de.domisum.auxiliumapi.util.bukkit.PacketUtil;
-import net.minecraft.server.v1_9_R1.PacketPlayOutEntityMetadata;
 
 @APIUsage
 public class TextHologram extends Hologram

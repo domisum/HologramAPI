@@ -1,10 +1,9 @@
 package de.domisum.lib.hologram;
 
-import java.util.logging.Logger;
-
+import de.domisum.lib.auxilium.AuxiliumLib;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.domisum.auxiliumapi.AuxiliumAPI;
+import java.util.logging.Logger;
 
 public class HologramLib
 {
@@ -44,14 +43,16 @@ public class HologramLib
 
 	protected void onEnable()
 	{
-		AuxiliumAPI.enable(this.plugin);
+		AuxiliumLib.enable(this.plugin);
 
-		getLogger().info(this.getClass().getSimpleName() + " has been enabled");
+		getLogger().info(this.getClass().getSimpleName()+" has been enabled");
 	}
 
 	protected void onDisable()
 	{
-		getLogger().info(this.getClass().getSimpleName() + " has been disabled");
+		AuxiliumLib.disable();
+
+		getLogger().info(this.getClass().getSimpleName()+" has been disabled");
 	}
 
 

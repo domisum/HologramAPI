@@ -1,8 +1,8 @@
 package de.domisum.lib.hologram.hologram;
 
-import de.domisum.auxiliumapi.data.container.math.Vector3D;
-import de.domisum.auxiliumapi.data.structure.pds.PlayerList;
-import de.domisum.auxiliumapi.util.bukkit.PacketUtil;
+import de.domisum.lib.auxilium.data.container.math.Vector3D;
+import de.domisum.lib.auxilium.data.structure.pds.PlayerList;
+import de.domisum.lib.auxilium.util.bukkit.PacketUtil;
 import net.minecraft.server.v1_9_R1.EntityArmorStand;
 import net.minecraft.server.v1_9_R1.PacketPlayOutEntity.PacketPlayOutEntityLook;
 import net.minecraft.server.v1_9_R1.PacketPlayOutEntityDestroy;

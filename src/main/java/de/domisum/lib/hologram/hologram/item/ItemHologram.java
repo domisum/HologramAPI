@@ -1,19 +1,18 @@
 package de.domisum.lib.hologram.hologram.item;
 
+import de.domisum.lib.auxilium.data.container.math.Vector3D;
+import de.domisum.lib.auxilium.util.bukkit.PacketUtil;
+import de.domisum.lib.auxilium.util.math.VectorUtil;
+import de.domisum.lib.hologram.hologram.Hologram;
+import net.minecraft.server.v1_9_R1.EnumItemSlot;
+import net.minecraft.server.v1_9_R1.PacketPlayOutEntityEquipment;
+import net.minecraft.server.v1_9_R1.Vector3f;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_9_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
-import de.domisum.auxiliumapi.data.container.math.Vector3D;
-import de.domisum.auxiliumapi.util.bukkit.PacketUtil;
-import de.domisum.auxiliumapi.util.math.VectorUtil;
-import de.domisum.lib.hologram.hologram.Hologram;
-import net.minecraft.server.v1_9_R1.EnumItemSlot;
-import net.minecraft.server.v1_9_R1.PacketPlayOutEntityEquipment;
-import net.minecraft.server.v1_9_R1.Vector3f;
 
 public class ItemHologram extends Hologram
 {
