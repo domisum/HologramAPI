@@ -1,4 +1,4 @@
-package de.domisum.hologramapi.hologram;
+package de.domisum.lib.hologram.hologram;
 
 import de.domisum.auxiliumapi.util.java.annotations.APIUsage;
 import org.bukkit.ChatColor;

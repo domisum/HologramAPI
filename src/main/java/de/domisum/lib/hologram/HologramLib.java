@@ -1,4 +1,4 @@
-package de.domisum.hologramapi;
+package de.domisum.lib.hologram;
 
 import java.util.logging.Logger;
 
@@ -6,18 +6,18 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import de.domisum.auxiliumapi.AuxiliumAPI;
 
-public class HologramAPI
+public class HologramLib
 {
 
 	// REFERENCES
-	private static HologramAPI instance;
+	private static HologramLib instance;
 	private JavaPlugin plugin;
 
 
 	// -------
 	// CONSTRUCTOR
 	// -------
-	protected HologramAPI(JavaPlugin plugin)
+	protected HologramLib(JavaPlugin plugin)
 	{
 		instance = this;
 		this.plugin = plugin;
@@ -30,7 +30,7 @@ public class HologramAPI
 		if(instance != null)
 			return;
 
-		new HologramAPI(plugin);
+		new HologramLib(plugin);
 	}
 
 	public static void disable()
@@ -58,7 +58,7 @@ public class HologramAPI
 	// -------
 	// GETTERS
 	// -------
-	public static HologramAPI getInstance()
+	public static HologramLib getInstance()
 	{
 		return instance;
 	}

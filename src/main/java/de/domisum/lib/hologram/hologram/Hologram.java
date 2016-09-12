@@ -1,4 +1,4 @@
-package de.domisum.hologramapi.hologram;
+package de.domisum.lib.hologram.hologram;
 
 import de.domisum.auxiliumapi.data.container.math.Vector3D;
 import de.domisum.auxiliumapi.data.structure.pds.PlayerList;
