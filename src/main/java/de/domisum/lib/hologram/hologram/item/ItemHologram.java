@@ -144,18 +144,18 @@ public class ItemHologram extends Hologram
 	// UTIL
 	private static boolean displayAsFullBlock(Material material)
 	{
-		if((material == Material.STONE_BUTTON) || (material == Material.WOOD_BUTTON))
+		if(material == Material.STONE_BUTTON || material == Material.WOOD_BUTTON)
 			return true;
-		if((material == Material.SNOW) || (material == Material.CARPET))
+		if(material == Material.SNOW || material == Material.CARPET)
 			return true;
-		if((material == Material.CHORUS_PLANT) || (material == Material.CHORUS_FLOWER))
+		if(material == Material.CHORUS_PLANT || material == Material.CHORUS_FLOWER)
 			return true;
-		if((material == Material.SKULL_ITEM))
+		if(material == Material.SKULL_ITEM)
 			return true;
 
-		if((material == Material.THIN_GLASS) || (material == Material.STAINED_GLASS_PANE) || (material == Material.IRON_FENCE))
+		if(material == Material.THIN_GLASS || material == Material.STAINED_GLASS_PANE || material == Material.IRON_FENCE)
 			return false;
-		if((material == Material.HOPPER) || (material == Material.BARRIER))
+		if(material == Material.HOPPER || material == Material.BARRIER)
 			return false;
 
 		return material.isSolid();
@@ -163,7 +163,7 @@ public class ItemHologram extends Hologram
 
 	private static boolean displayAsTool(Material material)
 	{
-		if((material == Material.STICK) || (material == Material.BONE) || (material == Material.BLAZE_ROD))
+		if(material == Material.STICK || material == Material.BONE || material == Material.BLAZE_ROD)
 			return true;
 
 		String name = material.name();
@@ -183,7 +183,7 @@ public class ItemHologram extends Hologram
 
 	private static boolean displayAsRod(Material material)
 	{
-		if((material == Material.FISHING_ROD) || (material == Material.CARROT_STICK))
+		if(material == Material.FISHING_ROD || material == Material.CARROT_STICK)
 			return true;
 
 		return false;
@@ -191,7 +191,7 @@ public class ItemHologram extends Hologram
 
 	private static boolean displayAsBannerOrShield(Material material)
 	{
-		if((material == Material.BANNER) || (material == Material.SHIELD))
+		if(material == Material.BANNER || material == Material.SHIELD)
 			return true;
 
 		return false;
