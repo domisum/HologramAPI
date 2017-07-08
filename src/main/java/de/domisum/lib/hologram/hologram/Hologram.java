@@ -1,9 +1,9 @@
 package de.domisum.lib.hologram.hologram;
 
 import de.domisum.lib.auxilium.data.container.math.Vector3D;
-import de.domisum.lib.auxiliumspigot.data.container.VectorConverter;
 import de.domisum.lib.auxiliumspigot.data.structure.pds.PlayerList;
 import de.domisum.lib.auxiliumspigot.util.PacketUtil;
+import lombok.Setter;
 import net.minecraft.server.v1_9_R1.EntityArmorStand;
 import net.minecraft.server.v1_9_R1.PacketPlayOutEntity.PacketPlayOutEntityLook;
 import net.minecraft.server.v1_9_R1.PacketPlayOutEntityDestroy;
@@ -14,6 +14,7 @@ import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_9_R1.CraftWorld;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class Hologram
@@ -21,25 +22,15 @@ public abstract class Hologram
 
 	// REFERENCES
 	protected EntityArmorStand armorStand;
-	protected List<Player> visibleTo = new PlayerList();
+	private List<Player> visibleTo = new PlayerList();
 
 	// PROPERTIES
-	protected World world;
+	@Setter protected World world;
 	protected Vector3D location;
-	protected Vector3D viewLocation = new Vector3D(0, 0, 0);
+	@Setter protected Vector3D viewLocation = new Vector3D(0, 0, 0);
 
 
 	// INIT
-	public Hologram(Location location)
-	{
-		this(location.getWorld(), VectorConverter.toVector3D(location));
-	}
-
-	public Hologram(Vector3D location)
-	{
-		this(null, location);
-	}
-
 	public Hologram(World world, Vector3D location)
 	{
 		this.world = world;
@@ -60,21 +51,11 @@ public abstract class Hologram
 
 
 	// SETTERS
-	public void setWorld(World world)
-	{
-		this.world = world;
-	}
-
 	public void setLocation(Vector3D location)
 	{
 		this.location = location;
 
 		teleport();
-	}
-
-	public void setViewLocation(Vector3D viewLocation)
-	{
-		this.viewLocation = viewLocation;
 	}
 
 
@@ -123,8 +104,7 @@ public abstract class Hologram
 
 	public void hideFrom(Player... players)
 	{
-		for(Player p : players)
-			this.visibleTo.remove(p);
+		this.visibleTo.removeAll(Arrays.asList(players));
 
 		hideFromSendPackets(players);
 	}
@@ -148,14 +128,14 @@ public abstract class Hologram
 	}
 
 
-	protected void sendTeleportPackets(Player... players)
+	private void sendTeleportPackets(Player... players)
 	{
 		// System.out.println(this.armorStand.getBukkitEntity().getLocation());
 		PacketPlayOutEntityTeleport packet = new PacketPlayOutEntityTeleport(this.armorStand);
 		PacketUtil.sendPacket(packet, players);
 	}
 
-	protected void sendLook(Player... players)
+	private void sendLook(Player... players)
 	{
 		PacketPlayOutEntityLook packet = new PacketPlayOutEntityLook(this.armorStand.getId(),
 				PacketUtil.toPacketAngle(this.armorStand.yaw), PacketUtil.toPacketAngle(this.armorStand.pitch), true);

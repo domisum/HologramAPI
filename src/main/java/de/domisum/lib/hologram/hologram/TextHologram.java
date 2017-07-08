@@ -4,6 +4,7 @@ import de.domisum.lib.auxilium.data.container.math.Vector3D;
 import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
 import de.domisum.lib.auxiliumspigot.data.container.VectorConverter;
 import de.domisum.lib.auxiliumspigot.util.PacketUtil;
+import lombok.Getter;
 import net.minecraft.server.v1_9_R1.PacketPlayOutEntityMetadata;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -15,29 +16,29 @@ public class TextHologram extends Hologram
 {
 
 	// CONSTANTS
-	protected static final double OFFSET_Y = -2.4;
+	private static final double OFFSET_Y = -2.4;
 
 	// PROPERTIES
-	protected String text;
+	@Getter private String text;
 
 
 	// INIT
-	public TextHologram(Location location, String text)
+	@APIUsage public TextHologram(Location location, String text)
 	{
 		this(location.getWorld(), VectorConverter.toVector3D(location), text);
 	}
 
-	public TextHologram(World world, String text)
+	@APIUsage public TextHologram(World world, String text)
 	{
 		this(world, new Vector3D(), text);
 	}
 
-	public TextHologram(String text)
+	@APIUsage public TextHologram(String text)
 	{
 		this(null, new Vector3D(), text);
 	}
 
-	public TextHologram(World world, Vector3D location, String text)
+	@APIUsage public TextHologram(World world, Vector3D location, String text)
 	{
 		super(world, location);
 		this.text = text;
@@ -45,16 +46,10 @@ public class TextHologram extends Hologram
 
 
 	// GETTERS
-	public String getText()
-	{
-		return this.text;
-	}
-
 	public double getWidth()
 	{
 		return getWidth(this.text);
 	}
-
 
 	@Override protected Location getArmorStandLocation()
 	{
@@ -87,7 +82,7 @@ public class TextHologram extends Hologram
 
 
 	// PACKETS
-	protected void sendMetadataPacket(Player... players)
+	private void sendMetadataPacket(Player... players)
 	{
 		PacketPlayOutEntityMetadata packet = new PacketPlayOutEntityMetadata(this.armorStand.getId(),
 				this.armorStand.getDataWatcher(), true);
@@ -96,7 +91,7 @@ public class TextHologram extends Hologram
 
 
 	// UTIL
-	public static double getWidth(String text)
+	@APIUsage public static double getWidth(String text)
 	{
 		text = ChatColor.stripColor(text);
 

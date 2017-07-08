@@ -1,10 +1,11 @@
 package de.domisum.lib.hologram.hologram.item;
 
 import de.domisum.lib.auxilium.data.container.math.Vector3D;
+import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
 import de.domisum.lib.auxilium.util.math.VectorUtil;
-import de.domisum.lib.auxiliumspigot.data.container.VectorConverter;
 import de.domisum.lib.auxiliumspigot.util.PacketUtil;
 import de.domisum.lib.hologram.hologram.Hologram;
+import lombok.Setter;
 import net.minecraft.server.v1_9_R1.EnumItemSlot;
 import net.minecraft.server.v1_9_R1.PacketPlayOutEntityEquipment;
 import net.minecraft.server.v1_9_R1.Vector3f;
@@ -19,27 +20,17 @@ public class ItemHologram extends Hologram
 {
 
 	// PROPERTIES
-	protected ItemStack itemStack;
-	protected double rotation;
+	private ItemStack itemStack;
+	@Setter private double rotation;
 
 
 	// INIT
-	public ItemHologram(Location location, ItemStack itemStack)
-	{
-		this(location.getWorld(), VectorConverter.toVector3D(location), itemStack);
-	}
-
-	public ItemHologram(Vector3D location, ItemStack itemStack)
-	{
-		this(null, location, itemStack);
-	}
-
 	public ItemHologram(ItemStack itemStack)
 	{
 		this(null, null, itemStack);
 	}
 
-	public ItemHologram(World world, Vector3D location, ItemStack itemStack)
+	@APIUsage public ItemHologram(World world, Vector3D location, ItemStack itemStack)
 	{
 		super(world, location);
 		this.itemStack = itemStack;
@@ -48,7 +39,7 @@ public class ItemHologram extends Hologram
 
 
 	// GETTERS
-	protected Vector3D getRotatableOffset()
+	private Vector3D getRotatableOffset()
 	{
 		if(this.itemStack.getType() == Material.SKULL_ITEM)
 			return new Vector3D(-0.21, -1.03, 0.43);
@@ -108,11 +99,6 @@ public class ItemHologram extends Hologram
 		teleport();
 	}
 
-	public void setRotation(double rotation)
-	{
-		this.rotation = rotation;
-	}
-
 
 	// ARMORSTAND
 	@Override public void createArmorStand()
@@ -146,7 +132,7 @@ public class ItemHologram extends Hologram
 		sendItemInHandPacket(players);
 	}
 
-	protected void sendItemInHandPacket(Player... players)
+	private void sendItemInHandPacket(Player... players)
 	{
 		PacketPlayOutEntityEquipment packet = new PacketPlayOutEntityEquipment(this.armorStand.getId(), EnumItemSlot.MAINHAND,
 				CraftItemStack.asNMSCopy(this.itemStack));
@@ -156,7 +142,7 @@ public class ItemHologram extends Hologram
 
 
 	// UTIL
-	protected static boolean displayAsFullBlock(Material material)
+	private static boolean displayAsFullBlock(Material material)
 	{
 		if((material == Material.STONE_BUTTON) || (material == Material.WOOD_BUTTON))
 			return true;
@@ -175,7 +161,7 @@ public class ItemHologram extends Hologram
 		return material.isSolid();
 	}
 
-	protected static boolean displayAsTool(Material material)
+	private static boolean displayAsTool(Material material)
 	{
 		if((material == Material.STICK) || (material == Material.BONE) || (material == Material.BLAZE_ROD))
 			return true;
@@ -195,7 +181,7 @@ public class ItemHologram extends Hologram
 		return false;
 	}
 
-	protected static boolean displayAsRod(Material material)
+	private static boolean displayAsRod(Material material)
 	{
 		if((material == Material.FISHING_ROD) || (material == Material.CARROT_STICK))
 			return true;
@@ -203,7 +189,7 @@ public class ItemHologram extends Hologram
 		return false;
 	}
 
-	protected static boolean displayAsBannerOrShield(Material material)
+	private static boolean displayAsBannerOrShield(Material material)
 	{
 		if((material == Material.BANNER) || (material == Material.SHIELD))
 			return true;

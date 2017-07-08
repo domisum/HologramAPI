@@ -1,26 +1,29 @@
 package de.domisum.lib.hologram;
 
+import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
 
+@APIUsage
 public class HologramLib
 {
 
 	// REFERENCES
-	private static HologramLib instance;
+	@Getter private static HologramLib instance;
 	private JavaPlugin plugin;
 
 
 	// INIT
-	protected HologramLib(JavaPlugin plugin)
+	private HologramLib(JavaPlugin plugin)
 	{
 		this.plugin = plugin;
 
 		onEnable();
 	}
 
-	public static void enable(JavaPlugin plugin)
+	@APIUsage public static void enable(JavaPlugin plugin)
 	{
 		if(instance != null)
 			return;
@@ -28,7 +31,7 @@ public class HologramLib
 		instance = new HologramLib(plugin);
 	}
 
-	public static void disable()
+	@APIUsage public static void disable()
 	{
 		if(instance == null)
 			return;
@@ -37,24 +40,19 @@ public class HologramLib
 		instance = null;
 	}
 
-	protected void onEnable()
+	private void onEnable()
 	{
 		getLogger().info(this.getClass().getSimpleName()+" has been enabled");
 	}
 
-	protected void onDisable()
+	private void onDisable()
 	{
 		getLogger().info(this.getClass().getSimpleName()+" has been disabled");
 	}
 
 
 	// GETTERS
-	public static HologramLib getInstance()
-	{
-		return instance;
-	}
-
-	public Logger getLogger()
+	private Logger getLogger()
 	{
 		return getInstance().plugin.getLogger();
 	}

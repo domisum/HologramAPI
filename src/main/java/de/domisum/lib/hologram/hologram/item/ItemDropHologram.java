@@ -1,6 +1,7 @@
 package de.domisum.lib.hologram.hologram.item;
 
 import de.domisum.lib.auxilium.data.container.math.Vector3D;
+import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
 import de.domisum.lib.auxiliumspigot.util.PacketUtil;
 import de.domisum.lib.hologram.hologram.Hologram;
 import net.minecraft.server.v1_9_R1.EntityItem;
@@ -15,26 +16,22 @@ import org.bukkit.craftbukkit.v1_9_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+@APIUsage
 public class ItemDropHologram extends Hologram
 {
 
 	// CONSTANTS
-	protected static final double OFFSET_Y = -1.8;
+	private static final double OFFSET_Y = -1.8;
 
 	// REFERENCES
-	protected EntityItem item;
+	private EntityItem item;
 
 	// PROPERTIES
-	protected ItemStack itemStack;
+	private ItemStack itemStack;
 
 
 	// INIT
-	public ItemDropHologram(World world, ItemStack itemStack)
-	{
-		this(world, new Vector3D(), itemStack);
-	}
-
-	public ItemDropHologram(World world, Vector3D location, ItemStack itemStack)
+	@APIUsage public ItemDropHologram(World world, Vector3D location, ItemStack itemStack)
 	{
 		super(world, location);
 		this.itemStack = itemStack;
@@ -52,7 +49,7 @@ public class ItemDropHologram extends Hologram
 
 
 	// SETTERS
-	public void setItemStack(ItemStack itemStack)
+	@APIUsage public void setItemStack(ItemStack itemStack)
 	{
 		this.itemStack = itemStack;
 		this.item.setItemStack(CraftItemStack.asNMSCopy(itemStack));
@@ -62,7 +59,7 @@ public class ItemDropHologram extends Hologram
 
 
 	// ARMORSTAND
-	protected void createItem()
+	private void createItem()
 	{
 		this.item = new EntityItem(((CraftWorld) this.world).getHandle(), this.location.x, this.location.y, this.location.z,
 				CraftItemStack.asNMSCopy(this.itemStack));
@@ -85,13 +82,13 @@ public class ItemDropHologram extends Hologram
 	}
 
 
-	protected void despawnItemEntity(Player... players)
+	private void despawnItemEntity(Player... players)
 	{
 		PacketPlayOutEntityDestroy packet = new PacketPlayOutEntityDestroy(this.item.getId());
 		PacketUtil.sendPacket(packet, players);
 	}
 
-	protected void sendItemEntity(Player... players)
+	private void sendItemEntity(Player... players)
 	{
 		PacketPlayOutSpawnEntity packetSpawn = new PacketPlayOutSpawnEntity(this.item, 2, 1);
 		PacketPlayOutMount packetMount = new PacketPlayOutMount(this.armorStand);
@@ -105,7 +102,7 @@ public class ItemDropHologram extends Hologram
 		sendItemMetadataPacket(players);
 	}
 
-	protected void sendItemMetadataPacket(Player... players)
+	private void sendItemMetadataPacket(Player... players)
 	{
 		PacketPlayOutEntityMetadata packetMetadata = new PacketPlayOutEntityMetadata(this.item.getId(),
 				this.item.getDataWatcher(), true);
