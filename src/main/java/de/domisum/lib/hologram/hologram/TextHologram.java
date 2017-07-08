@@ -93,9 +93,9 @@ public class TextHologram extends Hologram
 	// UTIL
 	@APIUsage public static double getWidth(String text)
 	{
-		text = ChatColor.stripColor(text);
+		String rawText = ChatColor.stripColor(text);
 
-		return text.length()*0.13;
+		return rawText.length()*0.13;
 	}
 
 }
