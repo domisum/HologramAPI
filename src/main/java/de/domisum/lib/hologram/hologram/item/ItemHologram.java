@@ -1,8 +1,9 @@
 package de.domisum.lib.hologram.hologram.item;
 
 import de.domisum.lib.auxilium.data.container.math.Vector3D;
-import de.domisum.lib.auxilium.util.bukkit.PacketUtil;
 import de.domisum.lib.auxilium.util.math.VectorUtil;
+import de.domisum.lib.auxiliumspigot.data.container.VectorConverter;
+import de.domisum.lib.auxiliumspigot.util.PacketUtil;
 import de.domisum.lib.hologram.hologram.Hologram;
 import net.minecraft.server.v1_9_R1.EnumItemSlot;
 import net.minecraft.server.v1_9_R1.PacketPlayOutEntityEquipment;
@@ -27,7 +28,7 @@ public class ItemHologram extends Hologram
 	// -------
 	public ItemHologram(Location location, ItemStack itemStack)
 	{
-		this(location.getWorld(), new Vector3D(location), itemStack);
+		this(location.getWorld(), VectorConverter.toVector3D(location), itemStack);
 	}
 
 	public ItemHologram(Vector3D location, ItemStack itemStack)
@@ -77,8 +78,7 @@ public class ItemHologram extends Hologram
 		return new Vector3D(0.37, -1.7, -0.55);
 	}
 
-	@Override
-	protected Location getArmorStandLocation()
+	@Override protected Location getArmorStandLocation()
 	{
 		Vector3D direction = this.location.subtract(this.viewLocation);
 		if(direction.length() == 0)
@@ -107,8 +107,7 @@ public class ItemHologram extends Hologram
 		sendItemInHandPacket(getVisibleToArray());
 	}
 
-	@Override
-	public void setViewLocation(Vector3D viewLocation)
+	@Override public void setViewLocation(Vector3D viewLocation)
 	{
 		super.setViewLocation(viewLocation);
 
@@ -124,8 +123,7 @@ public class ItemHologram extends Hologram
 	// -------
 	// ARMORSTAND
 	// -------
-	@Override
-	public void createArmorStand()
+	@Override public void createArmorStand()
 	{
 		super.createArmorStand();
 
@@ -152,8 +150,7 @@ public class ItemHologram extends Hologram
 	// -------
 	// PACKETS
 	// -------
-	@Override
-	protected void showToSendPackets(Player... players)
+	@Override protected void showToSendPackets(Player... players)
 	{
 		super.showToSendPackets(players);
 		sendItemInHandPacket(players);

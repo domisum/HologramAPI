@@ -1,8 +1,7 @@
 package de.domisum.lib.hologram.hologram.item;
 
-
 import de.domisum.lib.auxilium.data.container.math.Vector3D;
-import de.domisum.lib.auxilium.util.bukkit.PacketUtil;
+import de.domisum.lib.auxiliumspigot.util.PacketUtil;
 import de.domisum.lib.hologram.hologram.Hologram;
 import net.minecraft.server.v1_9_R1.EntityItem;
 import net.minecraft.server.v1_9_R1.PacketPlayOutEntityDestroy;
@@ -50,8 +49,7 @@ public class ItemDropHologram extends Hologram
 	// -------
 	// GETTERS
 	// -------
-	@Override
-	protected Location getArmorStandLocation()
+	@Override protected Location getArmorStandLocation()
 	{
 		return super.getArmorStandLocation().add(0, OFFSET_Y, 0);
 	}
@@ -83,16 +81,14 @@ public class ItemDropHologram extends Hologram
 	// -------
 	// PACKETS
 	// -------
-	@Override
-	protected void showToSendPackets(Player... players)
+	@Override protected void showToSendPackets(Player... players)
 	{
 		super.showToSendPackets(players);
 
 		sendItemEntity(players);
 	}
 
-	@Override
-	protected void hideFromSendPackets(Player... players)
+	@Override protected void hideFromSendPackets(Player... players)
 	{
 		super.hideFromSendPackets(players);
 		despawnItemEntity(players);

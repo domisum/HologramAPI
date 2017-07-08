@@ -1,8 +1,9 @@
 package de.domisum.lib.hologram.hologram;
 
 import de.domisum.lib.auxilium.data.container.math.Vector3D;
-import de.domisum.lib.auxilium.util.bukkit.PacketUtil;
 import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import de.domisum.lib.auxiliumspigot.data.container.VectorConverter;
+import de.domisum.lib.auxiliumspigot.util.PacketUtil;
 import net.minecraft.server.v1_9_R1.PacketPlayOutEntityMetadata;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -25,7 +26,7 @@ public class TextHologram extends Hologram
 	// -------
 	public TextHologram(Location location, String text)
 	{
-		this(location.getWorld(), new Vector3D(location), text);
+		this(location.getWorld(), VectorConverter.toVector3D(location), text);
 	}
 
 	public TextHologram(World world, String text)
@@ -59,8 +60,7 @@ public class TextHologram extends Hologram
 	}
 
 
-	@Override
-	protected Location getArmorStandLocation()
+	@Override protected Location getArmorStandLocation()
 	{
 		return super.getArmorStandLocation().add(0, OFFSET_Y, 0);
 	}
@@ -84,8 +84,7 @@ public class TextHologram extends Hologram
 	// -------
 	// ARMORSTAND
 	// -------
-	@Override
-	public void createArmorStand()
+	@Override public void createArmorStand()
 	{
 		super.createArmorStand();
 

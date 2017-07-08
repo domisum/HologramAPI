@@ -1,8 +1,9 @@
 package de.domisum.lib.hologram.hologram;
 
 import de.domisum.lib.auxilium.data.container.math.Vector3D;
-import de.domisum.lib.auxilium.data.structure.pds.PlayerList;
-import de.domisum.lib.auxilium.util.bukkit.PacketUtil;
+import de.domisum.lib.auxiliumspigot.data.container.VectorConverter;
+import de.domisum.lib.auxiliumspigot.data.structure.pds.PlayerList;
+import de.domisum.lib.auxiliumspigot.util.PacketUtil;
 import net.minecraft.server.v1_9_R1.EntityArmorStand;
 import net.minecraft.server.v1_9_R1.PacketPlayOutEntity.PacketPlayOutEntityLook;
 import net.minecraft.server.v1_9_R1.PacketPlayOutEntityDestroy;
@@ -33,7 +34,7 @@ public abstract class Hologram
 	// -------
 	public Hologram(Location location)
 	{
-		this(location.getWorld(), new Vector3D(location.toVector()));
+		this(location.getWorld(), VectorConverter.toVector3D(location));
 	}
 
 	public Hologram(Vector3D location)
