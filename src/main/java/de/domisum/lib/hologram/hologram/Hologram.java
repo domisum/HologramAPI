@@ -29,9 +29,7 @@ public abstract class Hologram
 	protected Vector3D viewLocation = new Vector3D(0, 0, 0);
 
 
-	// -------
-	// CONSTRUCTOR
-	// -------
+	// INIT
 	public Hologram(Location location)
 	{
 		this(location.getWorld(), VectorConverter.toVector3D(location));
@@ -49,9 +47,7 @@ public abstract class Hologram
 	}
 
 
-	// -------
 	// GETTERS
-	// -------
 	protected Location getArmorStandLocation()
 	{
 		return new Location(this.world, this.location.x, this.location.y, this.location.z);
@@ -63,9 +59,7 @@ public abstract class Hologram
 	}
 
 
-	// -------
 	// SETTERS
-	// -------
 	public void setWorld(World world)
 	{
 		this.world = world;
@@ -84,9 +78,7 @@ public abstract class Hologram
 	}
 
 
-	// -------
 	// ARMORSTAND
-	// -------
 	protected void createArmorStand()
 	{
 		Location asLocation = getArmorStandLocation();
@@ -116,9 +108,7 @@ public abstract class Hologram
 	}
 
 
-	// -------
 	// VISIBILITY
-	// -------
 	public void showTo(Player... players)
 	{
 		if(this.armorStand == null)
@@ -140,9 +130,7 @@ public abstract class Hologram
 	}
 
 
-	// -------
 	// PACKETS
-	// -------
 	protected void showToSendPackets(Player... players)
 	{
 		// System.out.println(this.armorStand.getBukkitEntity().getLocation());

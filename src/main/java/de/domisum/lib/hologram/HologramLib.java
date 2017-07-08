@@ -12,9 +12,7 @@ public class HologramLib
 	private JavaPlugin plugin;
 
 
-	// -------
-	// CONSTRUCTOR
-	// -------
+	// INIT
 	protected HologramLib(JavaPlugin plugin)
 	{
 		this.plugin = plugin;
@@ -50,9 +48,7 @@ public class HologramLib
 	}
 
 
-	// -------
 	// GETTERS
-	// -------
 	public static HologramLib getInstance()
 	{
 		return instance;

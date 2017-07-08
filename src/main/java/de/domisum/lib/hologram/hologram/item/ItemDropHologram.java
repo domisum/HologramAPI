@@ -28,9 +28,7 @@ public class ItemDropHologram extends Hologram
 	protected ItemStack itemStack;
 
 
-	// -------
-	// CONSTRUCTOR
-	// -------
+	// INIT
 	public ItemDropHologram(World world, ItemStack itemStack)
 	{
 		this(world, new Vector3D(), itemStack);
@@ -46,18 +44,14 @@ public class ItemDropHologram extends Hologram
 	}
 
 
-	// -------
 	// GETTERS
-	// -------
 	@Override protected Location getArmorStandLocation()
 	{
 		return super.getArmorStandLocation().add(0, OFFSET_Y, 0);
 	}
 
 
-	// -------
 	// SETTERS
-	// -------
 	public void setItemStack(ItemStack itemStack)
 	{
 		this.itemStack = itemStack;
@@ -67,9 +61,7 @@ public class ItemDropHologram extends Hologram
 	}
 
 
-	// -------
 	// ARMORSTAND
-	// -------
 	protected void createItem()
 	{
 		this.item = new EntityItem(((CraftWorld) this.world).getHandle(), this.location.x, this.location.y, this.location.z,
@@ -78,9 +70,7 @@ public class ItemDropHologram extends Hologram
 	}
 
 
-	// -------
 	// PACKETS
-	// -------
 	@Override protected void showToSendPackets(Player... players)
 	{
 		super.showToSendPackets(players);

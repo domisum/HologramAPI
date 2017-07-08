@@ -21,9 +21,7 @@ public class TextHologram extends Hologram
 	protected String text;
 
 
-	// -------
-	// CONSTRUCTOR
-	// -------
+	// INIT
 	public TextHologram(Location location, String text)
 	{
 		this(location.getWorld(), VectorConverter.toVector3D(location), text);
@@ -46,9 +44,7 @@ public class TextHologram extends Hologram
 	}
 
 
-	// -------
 	// GETTERS
-	// -------
 	public String getText()
 	{
 		return this.text;
@@ -66,9 +62,7 @@ public class TextHologram extends Hologram
 	}
 
 
-	// -------
 	// SETTERS
-	// -------
 	public void setText(String text)
 	{
 		this.text = text;
@@ -81,9 +75,7 @@ public class TextHologram extends Hologram
 	}
 
 
-	// -------
 	// ARMORSTAND
-	// -------
 	@Override public void createArmorStand()
 	{
 		super.createArmorStand();
@@ -94,9 +86,7 @@ public class TextHologram extends Hologram
 	}
 
 
-	// -------
 	// PACKETS
-	// -------
 	protected void sendMetadataPacket(Player... players)
 	{
 		PacketPlayOutEntityMetadata packet = new PacketPlayOutEntityMetadata(this.armorStand.getId(),
@@ -105,9 +95,7 @@ public class TextHologram extends Hologram
 	}
 
 
-	// -------
 	// UTIL
-	// -------
 	public static double getWidth(String text)
 	{
 		text = ChatColor.stripColor(text);

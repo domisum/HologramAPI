@@ -23,9 +23,7 @@ public class ItemHologram extends Hologram
 	protected double rotation;
 
 
-	// -------
-	// CONSTRUCTOR
-	// -------
+	// INIT
 	public ItemHologram(Location location, ItemStack itemStack)
 	{
 		this(location.getWorld(), VectorConverter.toVector3D(location), itemStack);
@@ -49,9 +47,7 @@ public class ItemHologram extends Hologram
 	}
 
 
-	// -------
 	// GETTERS
-	// -------
 	protected Vector3D getRotatableOffset()
 	{
 		if(this.itemStack.getType() == Material.SKULL_ITEM)
@@ -97,9 +93,7 @@ public class ItemHologram extends Hologram
 	}
 
 
-	// -------
 	// SETTERS
-	// -------
 	public void setItemStack(ItemStack itemStack)
 	{
 		this.itemStack = itemStack;
@@ -120,9 +114,7 @@ public class ItemHologram extends Hologram
 	}
 
 
-	// -------
 	// ARMORSTAND
-	// -------
 	@Override public void createArmorStand()
 	{
 		super.createArmorStand();
@@ -147,9 +139,7 @@ public class ItemHologram extends Hologram
 	}
 
 
-	// -------
 	// PACKETS
-	// -------
 	@Override protected void showToSendPackets(Player... players)
 	{
 		super.showToSendPackets(players);
@@ -165,9 +155,7 @@ public class ItemHologram extends Hologram
 	}
 
 
-	// -------
 	// UTIL
-	// -------
 	protected static boolean displayAsFullBlock(Material material)
 	{
 		if((material == Material.STONE_BUTTON) || (material == Material.WOOD_BUTTON))
