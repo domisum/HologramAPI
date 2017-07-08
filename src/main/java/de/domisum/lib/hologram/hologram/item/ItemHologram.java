@@ -44,10 +44,10 @@ public class ItemHologram extends Hologram
 		if(this.itemStack.getType() == Material.SKULL_ITEM)
 			return new Vector3D(-0.21, -1.03, 0.43);
 
-		if(displayAsFullBlock(this.itemStack.getType()))
+		if(shouldDisplayAsFullBlock(this.itemStack.getType()))
 			return new Vector3D(-0.05, -0.85, 0.25);
 
-		if(displayAsTool(this.itemStack.getType()))
+		if(shouldDisplayAsTool(this.itemStack.getType()))
 			return new Vector3D(0.3, -2.05, 0.06);
 
 		if(this.itemStack.getType() == Material.BOW)
@@ -59,7 +59,7 @@ public class ItemHologram extends Hologram
 		if(this.itemStack.getType() == Material.BANNER)
 			return new Vector3D(0.9, -1.8, 0.07);
 
-		if(displayAsRod(this.itemStack.getType()))
+		if(shouldDisplayAsRod(this.itemStack.getType()))
 			return new Vector3D(0.93, -1.2, 0.07);
 
 		return new Vector3D(0.37, -1.7, -0.55);
@@ -107,17 +107,17 @@ public class ItemHologram extends Hologram
 
 		if(this.itemStack.getType() == Material.SKULL_ITEM)
 			this.armorStand.setRightArmPose(new Vector3f(-45f, -135f, 0f));
-		else if(displayAsFullBlock(this.itemStack.getType()))
+		else if(shouldDisplayAsFullBlock(this.itemStack.getType()))
 			this.armorStand.setRightArmPose(new Vector3f(-15f, -135f, 0f));
 		else
 		{
-			if(displayAsTool(this.itemStack.getType()))
+			if(shouldDisplayAsTool(this.itemStack.getType()))
 				this.armorStand.setRightArmPose(new Vector3f(-145f, -90f, 0f));
-			else if(displayAsBannerOrShield(this.itemStack.getType()))
+			else if(shouldDisplayAsBannerOrShield(this.itemStack.getType()))
 				this.armorStand.setRightArmPose(new Vector3f(-90f, 90f, 0f));
 			else if(this.itemStack.getType() == Material.BOW)
 				this.armorStand.setRightArmPose(new Vector3f(0f, 100f, 220f));
-			else if(displayAsRod(this.itemStack.getType()))
+			else if(shouldDisplayAsRod(this.itemStack.getType()))
 				this.armorStand.setRightArmPose(new Vector3f(-35f, 90f, 0f));
 			else
 				this.armorStand.setRightArmPose(new Vector3f(-90f, 0f, 0f));
@@ -142,7 +142,7 @@ public class ItemHologram extends Hologram
 
 
 	// UTIL
-	private static boolean displayAsFullBlock(Material material)
+	private static boolean shouldDisplayAsFullBlock(Material material)
 	{
 		if(material == Material.STONE_BUTTON || material == Material.WOOD_BUTTON)
 			return true;
@@ -161,7 +161,7 @@ public class ItemHologram extends Hologram
 		return material.isSolid();
 	}
 
-	private static boolean displayAsTool(Material material)
+	private static boolean shouldDisplayAsTool(Material material)
 	{
 		if(material == Material.STICK || material == Material.BONE || material == Material.BLAZE_ROD)
 			return true;
@@ -181,7 +181,7 @@ public class ItemHologram extends Hologram
 		return false;
 	}
 
-	private static boolean displayAsRod(Material material)
+	private static boolean shouldDisplayAsRod(Material material)
 	{
 		if(material == Material.FISHING_ROD || material == Material.CARROT_STICK)
 			return true;
@@ -189,7 +189,7 @@ public class ItemHologram extends Hologram
 		return false;
 	}
 
-	private static boolean displayAsBannerOrShield(Material material)
+	private static boolean shouldDisplayAsBannerOrShield(Material material)
 	{
 		if(material == Material.BANNER || material == Material.SHIELD)
 			return true;
