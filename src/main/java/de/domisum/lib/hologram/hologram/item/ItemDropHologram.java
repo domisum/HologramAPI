@@ -1,7 +1,7 @@
 package de.domisum.lib.hologram.hologram.item;
 
 import de.domisum.lib.auxilium.data.container.math.Vector3D;
-import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.util.java.annotations.API;
 import de.domisum.lib.auxiliumspigot.util.PacketUtil;
 import de.domisum.lib.hologram.hologram.Hologram;
 import net.minecraft.server.v1_9_R1.EntityItem;
@@ -16,7 +16,7 @@ import org.bukkit.craftbukkit.v1_9_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-@APIUsage
+@API
 public class ItemDropHologram extends Hologram
 {
 
@@ -31,7 +31,7 @@ public class ItemDropHologram extends Hologram
 
 
 	// INIT
-	@APIUsage public ItemDropHologram(World world, Vector3D location, ItemStack itemStack)
+	@API public ItemDropHologram(World world, Vector3D location, ItemStack itemStack)
 	{
 		super(world, location);
 		this.itemStack = itemStack;
@@ -49,7 +49,7 @@ public class ItemDropHologram extends Hologram
 
 
 	// SETTERS
-	@APIUsage public void setItemStack(ItemStack itemStack)
+	@API public void setItemStack(ItemStack itemStack)
 	{
 		this.itemStack = itemStack;
 		this.item.setItemStack(CraftItemStack.asNMSCopy(itemStack));

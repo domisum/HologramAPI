@@ -1,7 +1,7 @@
 package de.domisum.lib.hologram.hologram;
 
 import de.domisum.lib.auxilium.data.container.math.Vector3D;
-import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.util.java.annotations.API;
 import de.domisum.lib.auxiliumspigot.data.container.VectorConverter;
 import de.domisum.lib.auxiliumspigot.util.PacketUtil;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-@APIUsage
+@API
 public class TextHologram extends Hologram
 {
 
@@ -23,22 +23,22 @@ public class TextHologram extends Hologram
 
 
 	// INIT
-	@APIUsage public TextHologram(Location location, String text)
+	@API public TextHologram(Location location, String text)
 	{
 		this(location.getWorld(), VectorConverter.toVector3D(location), text);
 	}
 
-	@APIUsage public TextHologram(World world, String text)
+	@API public TextHologram(World world, String text)
 	{
 		this(world, new Vector3D(), text);
 	}
 
-	@APIUsage public TextHologram(String text)
+	@API public TextHologram(String text)
 	{
 		this(null, new Vector3D(), text);
 	}
 
-	@APIUsage public TextHologram(World world, Vector3D location, String text)
+	@API public TextHologram(World world, Vector3D location, String text)
 	{
 		super(world, location);
 		this.text = text;
@@ -91,7 +91,7 @@ public class TextHologram extends Hologram
 
 
 	// UTIL
-	@APIUsage public static double getWidth(String text)
+	@API public static double getWidth(String text)
 	{
 		String rawText = ChatColor.stripColor(text);
 

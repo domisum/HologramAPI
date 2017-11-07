@@ -1,12 +1,12 @@
 package de.domisum.lib.hologram;
 
-import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.util.java.annotations.API;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
 
-@APIUsage
+@API
 public class HologramLib
 {
 
@@ -23,7 +23,7 @@ public class HologramLib
 		onEnable();
 	}
 
-	@APIUsage public static void enable(JavaPlugin plugin)
+	@API public static void enable(JavaPlugin plugin)
 	{
 		if(instance != null)
 			return;
@@ -31,7 +31,7 @@ public class HologramLib
 		instance = new HologramLib(plugin);
 	}
 
-	@APIUsage public static void disable()
+	@API public static void disable()
 	{
 		if(instance == null)
 			return;

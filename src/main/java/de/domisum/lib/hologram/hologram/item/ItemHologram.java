@@ -1,7 +1,7 @@
 package de.domisum.lib.hologram.hologram.item;
 
 import de.domisum.lib.auxilium.data.container.math.Vector3D;
-import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.util.java.annotations.API;
 import de.domisum.lib.auxilium.util.math.VectorUtil;
 import de.domisum.lib.auxiliumspigot.util.PacketUtil;
 import de.domisum.lib.hologram.hologram.Hologram;
@@ -30,7 +30,7 @@ public class ItemHologram extends Hologram
 		this(null, null, itemStack);
 	}
 
-	@APIUsage public ItemHologram(World world, Vector3D location, ItemStack itemStack)
+	@API public ItemHologram(World world, Vector3D location, ItemStack itemStack)
 	{
 		super(world, location);
 		this.itemStack = itemStack;
