@@ -11,7 +11,8 @@ public class HologramLib
 {
 
 	// REFERENCES
-	@Getter private static HologramLib instance;
+	@Getter
+	private static HologramLib instance;
 	private JavaPlugin plugin;
 
 
@@ -23,7 +24,8 @@ public class HologramLib
 		onEnable();
 	}
 
-	@API public static void enable(JavaPlugin plugin)
+	@API
+	public static void enable(JavaPlugin plugin)
 	{
 		if(instance != null)
 			return;
@@ -31,7 +33,8 @@ public class HologramLib
 		instance = new HologramLib(plugin);
 	}
 
-	@API public static void disable()
+	@API
+	public static void disable()
 	{
 		if(instance == null)
 			return;
