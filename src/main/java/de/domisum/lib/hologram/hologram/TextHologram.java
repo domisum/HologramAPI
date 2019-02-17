@@ -5,7 +5,7 @@ import de.domisum.lib.auxilium.util.java.annotations.API;
 import de.domisum.lib.auxiliumspigot.data.container.VectorConverter;
 import de.domisum.lib.auxiliumspigot.util.PacketUtil;
 import lombok.Getter;
-import net.minecraft.server.v1_13_R2.ChatMessage;
+import net.minecraft.server.v1_13_R2.ChatComponentText;
 import net.minecraft.server.v1_13_R2.PacketPlayOutEntityMetadata;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -17,7 +17,7 @@ public class TextHologram extends Hologram
 {
 
 	// CONSTANTS
-	private static final double OFFSET_Y = -2.4;
+	private static final double OFFSET_Y = -1.4;
 
 	// PROPERTIES
 	@Getter
@@ -71,7 +71,7 @@ public class TextHologram extends Hologram
 
 		if(armorStand != null)
 		{
-			armorStand.setCustomName(new ChatMessage(text));
+			armorStand.setCustomName(new ChatComponentText(text));
 			sendMetadataPacket(getVisibleToArray());
 		}
 	}
@@ -79,11 +79,11 @@ public class TextHologram extends Hologram
 
 	// ARMORSTAND
 	@Override
-	public void createArmorStand()
+	protected void createArmorStand()
 	{
 		super.createArmorStand();
 
-		armorStand.setCustomName(new ChatMessage(text));
+		armorStand.setCustomName(new ChatComponentText(text));
 		armorStand.setCustomNameVisible(true);
 		armorStand.setSmall(true);
 	}

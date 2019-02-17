@@ -13,15 +13,13 @@ public class HologramLib
 	// REFERENCES
 	@Getter
 	private static HologramLib instance;
-	private JavaPlugin plugin;
+	private final JavaPlugin plugin;
 
 
 	// INIT
 	private HologramLib(JavaPlugin plugin)
 	{
 		this.plugin = plugin;
-
-		onEnable();
 	}
 
 	@API
@@ -31,6 +29,7 @@ public class HologramLib
 			return;
 
 		instance = new HologramLib(plugin);
+		getInstance().onEnable();
 	}
 
 	@API
@@ -45,12 +44,12 @@ public class HologramLib
 
 	private void onEnable()
 	{
-		getLogger().info(this.getClass().getSimpleName()+" has been enabled");
+		getLogger().info(getClass().getSimpleName()+" has been enabled");
 	}
 
 	private void onDisable()
 	{
-		getLogger().info(this.getClass().getSimpleName()+" has been disabled");
+		getLogger().info(getClass().getSimpleName()+" has been disabled");
 	}
 
 

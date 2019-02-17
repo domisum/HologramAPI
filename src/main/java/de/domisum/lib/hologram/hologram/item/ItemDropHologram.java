@@ -2,6 +2,7 @@ package de.domisum.lib.hologram.hologram.item;
 
 import de.domisum.lib.auxilium.data.container.math.Vector3D;
 import de.domisum.lib.auxilium.util.java.annotations.API;
+import de.domisum.lib.auxiliumspigot.data.container.VectorConverter;
 import de.domisum.lib.auxiliumspigot.util.PacketUtil;
 import de.domisum.lib.hologram.hologram.Hologram;
 import net.minecraft.server.v1_13_R2.EntityItem;
@@ -31,6 +32,11 @@ public class ItemDropHologram extends Hologram
 
 
 	// INIT
+	public ItemDropHologram(Location location, ItemStack itemStack)
+	{
+		this(location.getWorld(), VectorConverter.toVector3D(location), itemStack);
+	}
+
 	@API
 	public ItemDropHologram(World world, Vector3D location, ItemStack itemStack)
 	{
