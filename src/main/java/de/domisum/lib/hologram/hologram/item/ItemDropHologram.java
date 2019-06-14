@@ -32,6 +32,11 @@ public class ItemDropHologram extends Hologram
 
 
 	// INIT
+	public ItemDropHologram(ItemStack itemStack)
+	{
+		this(null, null, itemStack);
+	}
+
 	public ItemDropHologram(Location location, ItemStack itemStack)
 	{
 		this(location.getWorld(), VectorConverter.toVector3D(location), itemStack);
